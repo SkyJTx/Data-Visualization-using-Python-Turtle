@@ -1,6 +1,6 @@
-import turtle
-
 class LineChart():
+    
+    import turtle
     
     def __init__(self,datatag,hierarch,value,x_type,y_type):
         self.tag = datatag
@@ -9,14 +9,15 @@ class LineChart():
         self.x = x_type
         self.y = y_type
         
+        
     def screen(self,width,height):
         start = width/8
         end = 7*width/8
         length = width-2*width/8
         big_round = (sorted(self.val)[len(self.val)-1]//(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))+1)*(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))
-        screen = turtle.Screen() #screen
-        chart = turtle.Turtle() #chart
-        line = turtle.Turtle() #t[2]
+        screen = self.turtle.Screen() #screen
+        chart = self.turtle.Turtle() #chart
+        line = self.turtle.Turtle() #t[2]
         screen.setup(width,height)
         screen.setworldcoordinates(0,0,width,height)
         screen.title(self.tag)
@@ -33,8 +34,8 @@ class LineChart():
         chart.write(self.tag, move=False, align="center", font=("Segoe UI", int(width/50), "bold italic"))
         chart.setpos(start,length+start+14*start/100)
         chart.write(self.x, move=False, align="center", font=("Segoe UI", int(14*start/100), "bold italic"))
-        chart.setpos(length+start+14*start/100,start)
-        chart.write(self.y, move=False, align="left", font=("Segoe UI", int(14*start/100), "bold italic"))
+        chart.setpos(length+start+14*start/100,start+2*start/10)
+        chart.write(self.y, move=False, align="center", font=("Segoe UI", int(14*start/100), "bold italic"))
         chart.setpos(start-2*start/10,start-2*start/10)
         chart.write(0, move=False, align="right", font=("Segoe UI", int(14*start/100), "bold italic"))
         chart.setpos(start,start)
@@ -72,13 +73,29 @@ class LineChart():
             line.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start+self.val[i-1]/(big_round/6)*(length/7)+start/10)
             line.write(self.val[i-1], move=False, align="center", font=("Segoe UI", int(12*start/100), "bold italic")) 
         line.hideturtle()
-        turtle.mainloop()
+        self.turtle.mainloop()
 
-dataTitle = "The Numbers of Thailand Cumulative COVID-19 Confirm Case"
-x_type = "Cases (People)"
-y_type = "Time"
-x_axis = ["Q2-2020","Q4-2020","Q2-2021","Q4-2021","Q2-2022"]
-y_axis = [43,3787,26031,1920000,2910000]
+dataTitle1 = "Thailand Cumulative COVID-19 Confirm Case Every 6 Months" 
+x_type1 = "Cases (People)"
+y_type1 = "Time"
+x_axis1 = ["Q2-2020","Q4-2020","Q2-2021","Q4-2021","Q2-2022"] # At least it has to be an array with the same length as y_axis
+y_axis1 = [43,3787,26031,1920000,2910000] # Has to be only an array(List,Tuple) of numbers
 
-l = LineChart(dataTitle,x_axis,y_axis,x_type,y_type)
-l.screen(600,600)
+dataTitle2 = "The Attendances over this week"
+x_type2 = "Attendance (People)"
+y_type2 = "Day"
+x_axis2 = ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+y_axis2 = [40,20,21,35,42]
+
+dataTitle3 = "ปริมาณน้ำฝนสัปดาห์นี้"
+x_type3 = "ปริมาณน้ำฝน (mm)"
+y_type3 = "วัน"
+x_axis3 = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสฯ","ศุกร์","เสาร์"]
+y_axis3 = [10,0,20,30,0,0,0]
+
+#l = LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1)
+#l.screen(600,600)
+#m = LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2)
+#m.screen(600,600)
+n = LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3)
+n.screen(600,600)
