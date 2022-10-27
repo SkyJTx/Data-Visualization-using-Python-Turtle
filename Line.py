@@ -9,7 +9,8 @@ class LineChart():
         self.x = x_type
         self.y = y_type
             
-    def screen(self,width=600,height=600,textSize=0):
+    def screen(self,width=800,textSize=0):
+        height = width
         #calculation
         start = width/8 #find graph start point
         end = 7*width/8 #find chart line end coordinate
@@ -68,7 +69,7 @@ class LineChart():
             chart.setpos(start+start/10,i*length/7+start)
             chart.penup()
             chart.setpos(start-2*start/10,i*length/7+start)
-            chart.write(int(i*big_round/6), move=False, align="right", font=("Segoe UI", int(textSize), "bold italic"))
+            chart.write("{:.2f}".format(i*big_round/6), move=False, align="right", font=("Segoe UI", int(textSize), "bold italic"))
         #draw x axis little line and write x axis data hierarch
         for i in range(1,len(self.hir)+1):
             chart.penup()
@@ -114,9 +115,9 @@ y_type3 = "ปริมาณน้ำฝน (mm)"
 x_axis3 = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสฯ","ศุกร์","เสาร์"]
 y_axis3 = [10,0,20,30,0,0,0]
 
-#l = LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1)
-#l.screen(600,600)
-m = LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2)
-m.screen()
-#n = LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3)
-#n.screen(600,600)
+#Using LineChart
+#LineChart(Data Title,X values,Y values,X type,Y type).screen(Squared window length,Text size) to visualize datas to line chart
+
+#LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1).screen()
+LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2).screen(1200)
+#LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3).screen()
