@@ -43,12 +43,12 @@ class LineChart():
         #write Title
         chart.setpos(width/2,height-start/3)
         chart.write(self.tag, move=False, align="center", font=("Segoe UI", int(4*textSize/3), "bold italic"))
-        #write X axis
-        chart.setpos(start,length+start+14*start/100)
-        chart.write(self.x, move=False, align="center", font=("Segoe UI", int(105*textSize/90), "bold italic"))
         #write y axis
-        chart.setpos(length+start+14*start/100,start+2*start/10)
+        chart.setpos(start,length+start+14*start/100)
         chart.write(self.y, move=False, align="center", font=("Segoe UI", int(105*textSize/90), "bold italic"))
+        #write x axis
+        chart.setpos(length+start+14*start/100,start+2*start/10)
+        chart.write(self.x, move=False, align="center", font=("Segoe UI", int(105*textSize/90), "bold italic"))
         #write 0 as start
         chart.setpos(start-2*start/10,start-2*start/10)
         chart.write(0, move=False, align="right", font=("Segoe UI", int(105*textSize/90), "bold italic"))
@@ -97,26 +97,26 @@ class LineChart():
         self.turtle.mainloop()
 
 dataTitle1 = "Thailand Cumulative COVID-19 Confirm Case Every 6 Months" 
-x_type1 = "Cases (People)"
-y_type1 = "Time"
+x_type1 = "Time"
+y_type1 = "Cases (People)"
 x_axis1 = ["Q2-2020","Q4-2020","Q2-2021","Q4-2021","Q2-2022"] # At least it has to be an array with the same length as y_axis
 y_axis1 = [43,3787,26031,1920000,2910000] # Has to be only an array(List,Tuple) of numbers
 
 dataTitle2 = "The Attendances over this week"
-x_type2 = "Attendance (People)"
-y_type2 = "Day"
+x_type2 = "Day"
+y_type2 = "Attendance (People)"
 x_axis2 = ["Monday","Tuesday","Wednesday","Thursday","Friday"]
 y_axis2 = [40,20,21,35,42]
 
 dataTitle3 = "ปริมาณน้ำฝนสัปดาห์นี้"
-x_type3 = "ปริมาณน้ำฝน (mm)"
-y_type3 = "วัน"
+x_type3 = "วัน"
+y_type3 = "ปริมาณน้ำฝน (mm)"
 x_axis3 = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสฯ","ศุกร์","เสาร์"]
 y_axis3 = [10,0,20,30,0,0,0]
 
 #l = LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1)
 #l.screen(600,600)
 m = LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2)
-m.screen(600,600)
+m.screen()
 #n = LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3)
 #n.screen(600,600)
