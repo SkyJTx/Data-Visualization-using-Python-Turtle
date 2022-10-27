@@ -8,36 +8,51 @@ class LineChart():
         self.val = value
         self.x = x_type
         self.y = y_type
-        
-        
-    def screen(self,width,height):
-        start = width/8
-        end = 7*width/8
-        length = width-2*width/8
-        big_round = (sorted(self.val)[len(self.val)-1]//(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))+1)*(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))
+            
+    def screen(self,width=600,height=600,textSize=0):
+        #calculation
+        start = width/8 #find graph start point
+        end = 7*width/8 #find chart line end coordinate
+        length = width-2*width/8 # find length of a chart line
+        if type(textSize) is float or type(textSize) is int: #for checking if textSize is appropriate
+            if textSize >= 1:
+                textSize = textSize//1
+            else:
+                textSize = int(min(width,height)*3/200)
+        else:
+            textSize = int(min(width,height)*3/200)
+        big_round = (sorted(self.val)[len(self.val)-1]//(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))+1)*(10**(len(str(sorted(self.val)[len(self.val)-1]))-1)) #find rounded biggest data value element
         screen = self.turtle.Screen() #screen
         chart = self.turtle.Turtle() #chart
-        line = self.turtle.Turtle() #t[2]
-        screen.setup(width,height)
-        screen.setworldcoordinates(0,0,width,height)
-        screen.title(self.tag)
+        line = self.turtle.Turtle() #graph
+        screen.setup(width,height) #create screen
+        screen.setworldcoordinates(0,0,width,height) #set (0,0) as bottom left corner and (width,height) as top right corner of the screen
+        screen.title(self.tag) #create window title
+        #config chart turtle
         chart.hideturtle()
         chart.speed(0)
         chart.pensize(width=5)
+        #config graph turtle
         line.speed(1)
         line.pensize(width=3)
         line.color("gold")
         line.penup()
+        #draw chart line
         line.setpos(start,start)
         chart.penup()
+        #write Title
         chart.setpos(width/2,height-start/3)
-        chart.write(self.tag, move=False, align="center", font=("Segoe UI", int(width/50), "bold italic"))
+        chart.write(self.tag, move=False, align="center", font=("Segoe UI", int(4*textSize/3), "bold italic"))
+        #write X axis
         chart.setpos(start,length+start+14*start/100)
-        chart.write(self.x, move=False, align="center", font=("Segoe UI", int(14*start/100), "bold italic"))
+        chart.write(self.x, move=False, align="center", font=("Segoe UI", int(105*textSize/90), "bold italic"))
+        #write y axis
         chart.setpos(length+start+14*start/100,start+2*start/10)
-        chart.write(self.y, move=False, align="center", font=("Segoe UI", int(14*start/100), "bold italic"))
+        chart.write(self.y, move=False, align="center", font=("Segoe UI", int(105*textSize/90), "bold italic"))
+        #write 0 as start
         chart.setpos(start-2*start/10,start-2*start/10)
-        chart.write(0, move=False, align="right", font=("Segoe UI", int(14*start/100), "bold italic"))
+        chart.write(0, move=False, align="right", font=("Segoe UI", int(105*textSize/90), "bold italic"))
+        #draw chart line
         chart.setpos(start,start)
         chart.pendown()
         chart.setpos(start,end)
@@ -45,6 +60,7 @@ class LineChart():
         chart.setpos(start,start)
         chart.pendown()
         chart.setpos(end,start)
+        #draw y axis little line and write y axis value
         for i in range(1,7):
             chart.penup()
             chart.setpos(start-start/10,i*length/7+start)
@@ -52,7 +68,8 @@ class LineChart():
             chart.setpos(start+start/10,i*length/7+start)
             chart.penup()
             chart.setpos(start-2*start/10,i*length/7+start)
-            chart.write(int(i*big_round/6), move=False, align="right", font=("Segoe UI", int(12*start/100), "bold italic"))
+            chart.write(int(i*big_round/6), move=False, align="right", font=("Segoe UI", int(textSize), "bold italic"))
+        #draw x axis little line and write x axis data hierarch
         for i in range(1,len(self.hir)+1):
             chart.penup()
             chart.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start+start/10)
@@ -60,19 +77,23 @@ class LineChart():
             chart.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start-start/10)
             chart.penup()
             chart.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start-4*start/10)
-            chart.write(self.hir[i-1], move=False, align="center", font=("Segoe UI", int(12*start/100), "bold italic")) 
+            chart.write(self.hir[i-1], move=False, align="center", font=("Segoe UI", int(textSize), "bold italic")) 
+        #draw graph line
         for i in range(1,len(self.val)+1):
             line.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start+self.val[i-1]/(big_round/6)*(length/7))
             line.dot(start/8)
             line.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start+self.val[i-1]/(big_round/6)*(length/7))
             line.pendown()
+        #config graph turtle again
         line.color("grey")
         line.speed(0)
+        #write data value
         for i in range(1,len(self.val)+1):
             line.penup()
             line.setpos(i*length/(len(self.hir)+1)+(len(self.hir)+1)/2+start,start+self.val[i-1]/(big_round/6)*(length/7)+start/10)
-            line.write(self.val[i-1], move=False, align="center", font=("Segoe UI", int(12*start/100), "bold italic")) 
+            line.write(self.val[i-1], move=False, align="center", font=("Segoe UI", int(textSize), "bold italic")) 
         line.hideturtle()
+        #make it always appear until user close the window
         self.turtle.mainloop()
 
 dataTitle1 = "Thailand Cumulative COVID-19 Confirm Case Every 6 Months" 
@@ -95,7 +116,7 @@ y_axis3 = [10,0,20,30,0,0,0]
 
 #l = LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1)
 #l.screen(600,600)
-#m = LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2)
-#m.screen(600,600)
-n = LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3)
-n.screen(600,600)
+m = LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2)
+m.screen(600,600)
+#n = LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3)
+#n.screen(600,600)
