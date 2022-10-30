@@ -2,26 +2,20 @@ class LineChart():
     
     import turtle
     
-    def __init__(self,datatag,hierarch,value,x_type,y_type):
+    def __init__(self,datatag="Blank",hierarch=[],value=[],x_type="Blank",y_type="Blank"):
         self.tag = datatag
         self.hir = hierarch
         self.val = value
         self.x = x_type
         self.y = y_type
-            
-    def screen(self,width=800,textSize=0):
+
+    
+    def screen(self,width,textSize):
         height = width
         #calculation
         start = width/8 #find graph start point
         end = 7*width/8 #find chart line end coordinate
         length = width-2*width/8 # find length of a chart line
-        if type(textSize) is float or type(textSize) is int: #for checking if textSize is appropriate
-            if textSize >= 1:
-                textSize = textSize//1
-            else:
-                textSize = int(min(width,height)*3/200)
-        else:
-            textSize = int(min(width,height)*3/200)
         big_round = (sorted(self.val)[len(self.val)-1]//(10**(len(str(sorted(self.val)[len(self.val)-1]))-1))+1)*(10**(len(str(sorted(self.val)[len(self.val)-1]))-1)) #find rounded biggest data value element
         screen = self.turtle.Screen() #screen
         chart = self.turtle.Turtle() #chart
@@ -96,6 +90,16 @@ class LineChart():
         line.hideturtle()
         #make it always appear until user close the window
         self.turtle.mainloop()
+        
+    #check if the data or screen config is appropriate
+    def display(self,width="",textSize=""):
+        try:
+            self.screen(width,textSize)
+        except:
+            try:
+                self.screen(800,12)
+            except:
+                print("DataInputError: Please check your data and try again.")
 
 dataTitle1 = "Thailand Cumulative COVID-19 Confirm Case Every 6 Months" 
 x_type1 = "Time"
@@ -118,6 +122,6 @@ y_axis3 = [10,0,20,30,0,0,0]
 #Using LineChart
 #LineChart(Data Title,X values,Y values,X type,Y type).screen(Squared window length,Text size) to visualize datas to line chart
 
-#LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1).screen()
-LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2).screen(1200)
-#LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3).screen()
+#LineChart(dataTitle1,x_axis1,y_axis1,x_type1,y_type1).display(600,9)
+#LineChart(dataTitle2,x_axis2,y_axis2,x_type2,y_type2).display(800,12)
+LineChart(dataTitle3,x_axis3,y_axis3,x_type3,y_type3).display()
