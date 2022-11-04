@@ -5,11 +5,13 @@ class Data:
     def __init__(self,file):
         self.file = file
     
+    #convert str to float or int
     def conS2N(self,str):
         if float(str) % 1 == 0:
             return int(str)
         return float(str)
     
+    #read csv file and append into a single list
     def readFile(self):
         try:
             datalist = []
@@ -281,7 +283,6 @@ class Bar(Data):
 class Pie(Data):
     
     import turtle
-    import random
     
     def __init__(self,file):
         Data.__init__(self,file)
@@ -306,7 +307,7 @@ class Pie(Data):
         screen.title(self.tag) #create window title
         #config pie turtle
         pie.speed(10)
-        pie.color("black")
+        pie.color("gray")
         pie.penup()
         #write Title
         pie.setpos(0,height/2.25)
@@ -314,7 +315,6 @@ class Pie(Data):
         pie.setpos(0,0)
         #draw circle
         pie.sety(-radius)
-        pie.color("black")
         for i in range(len(self.val)):
             pie.fillcolor(self.color[i])
             pie.begin_fill()
@@ -380,7 +380,7 @@ Output:
 """ 
 
 #Using LineChart
-#Line(File Name as string).screen(Squared window length,Text size) to visualize datas
+#Line(File Name as string).display(Squared window length,Text size) to visualize datas
 
 #Example
 #Line("Thailand Cumulative COVID-19 Confirm Case Every 6 Months").display()
@@ -388,17 +388,17 @@ Output:
 #Line("ปริมาณน้ำฝนสัปดาห์นี้").display()
 
 #Using BarChart
-#Bar(File Name as string).screen(Squared window length,Text size) to visualize datas
+#Bar(File Name as string).display(Squared window length,Text size) to visualize datas
 
 #Example
 #Bar("Thailand Cumulative COVID-19 Confirm Case Every 6 Months").display()
 #Bar("The Attendances over this week").display()
-Bar("ปริมาณน้ำฝนสัปดาห์นี้").display()
+#Bar("ปริมาณน้ำฝนสัปดาห์นี้").display()
 
 #Using PieChart
-#Pie(File Name as string).screen(Squared window length,Text size) to visualize datas
+#Pie(File Name as string).display(Squared window length,Text size) to visualize datas
 
 #Example
 #Pie("Thailand Cumulative COVID-19 Confirm Case Every 6 Months").display()
-#Pie("The Attendances over this week").display()
+#Pie("The Attendances over this week").display(1000,12)
 #Pie("ปริมาณน้ำฝนสัปดาห์นี้").display()
