@@ -147,17 +147,15 @@ class Line(Data):
         try:
             self.screen(width,textSize)
         except:
-            #if an error occured
             try:
                 self.screen(800,12)
-                #if there is still an error occured
             except:
-                if type(self.hir) is not list or type(self.val) is not list: #if x or y value is not list
-                    print("DataInputError: Please check your data and try again.")
+                if type(self.hir) is not list or type(self.val) is not list:
+                    print("DataInputError at Type: Please check your data and try again.")
                 else:
-                    if self.tag == "" or self.x == "" or self.y == "" or self.hir == [] or self.val == []: #if no data were given 
-                        print("DataInputError: Please check your data and try again.")
-                    else: #otherwise
+                    if self.tag == "" or self.x == "" or self.y == "" or self.hir == [] or self.val == []:
+                        print("DataInputError at Default: Please check your data and try again.")
+                    else:
                         print("InterruptionWarning: Program is stopped working.")
                         
 class Bar(Data):
@@ -266,17 +264,15 @@ class Bar(Data):
         try:
             self.screen(width,textSize)
         except:
-            #if an error occured
             try:
                 self.screen(800,12)
-                #if there is still an error occured
             except:
-                if type(self.hir) is not list or type(self.val) is not list: #if x or y value is not list
-                    print("DataInputError: Please check your data and try again.")
+                if type(self.hir) is not list or type(self.val) is not list:
+                    print("DataInputError at Type: Please check your data and try again.")
                 else:
-                    if self.tag == "" or self.x == "" or self.y == "" or self.hir == [] or self.val == []: #if no data were given 
-                        print("DataInputError: Please check your data and try again.")
-                    else: #otherwise
+                    if self.tag == "" or self.x == "" or self.y == "" or self.hir == [] or self.val == []:
+                        print("DataInputError at Default: Please check your data and try again.")
+                    else:
                         print("InterruptionWarning: Program is stopped working.")
 
 #Work in Progress        
@@ -326,16 +322,18 @@ class Pie(Data):
             pie.penup()
             pie.sety(-radius)
             pie.setposition(position)
+        #config pie for labeling
         pie.setpos(0,0)
-        pie.penup()
+        pie.pendown()
         pie.speed(0)
         pie.sety(-radius*1.3)
+        #write label
         for i in range(len(self.hir)):
             pie.circle(radius*1.3, (self.val[i] * 360 / Sum)/2)
             pie.write(self.hir[i]+" , "+str(self.val[i]),font = ("Segoe UI", textSize, "bold italic"),align="center")
             pie.circle(radius*1.3, (self.val[i] * 360 / Sum)/2)
         pie.hideturtle()
-
+        #show until close
         self.turtle.mainloop()
         
     #check if the data or screen config is appropriate
@@ -347,10 +345,10 @@ class Pie(Data):
                 self.screen(800,12)
             except:
                 if type(self.hir) is not list or type(self.val) is not list:
-                    print("DataInputError: Please check your data and try again.")
+                    print("DataInputError at Type: Please check your data and try again.")
                 else:
                     if self.tag == "" or self.x == "" or self.y == "" or self.hir == [] or self.val == []:
-                        print("DataInputError: Please check your data and try again.")
+                        print("DataInputError at Default: Please check your data and try again.")
                     else:
                         print("InterruptionWarning: Program is stopped working.")
                         
@@ -400,5 +398,5 @@ Output:
 
 #Example
 #Pie("Thailand Cumulative COVID-19 Confirm Case Every 6 Months").display()
-#Pie("The Attendances over this week").display(1000,12)
+Pie("The Attendances over this week").display(600,9)
 #Pie("ปริมาณน้ำฝนสัปดาห์นี้").display()
