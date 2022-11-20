@@ -44,7 +44,7 @@ class Data:
             print(datalist)
             return datalist
         except:
-            return ["","",[],"",[],[]]
+            return ["Error while reading data","Please check your data",[],"and try again",[],[]]
                 
 class Line(Data):
     
